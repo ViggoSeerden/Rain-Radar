@@ -36,7 +36,7 @@ import WeatherKit
         weather?.currentWeather.temperature
         
         let convert = temp?.converted(to: .celsius).description
-        return convert ?? "Loading Weather Data"
+        return convert ?? "Loading Weather Data..."
     }
     
 }

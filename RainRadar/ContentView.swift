@@ -19,7 +19,7 @@ struct ContentView: View {
                     await weatherKitManager.getWeather(latitude: locationDataManager.latitude, longitude: locationDataManager.longitude)
                 }
         } else {
-            Text("Error Loading Location")
+            Text("Error Loading Location:")
         }
     }
 }

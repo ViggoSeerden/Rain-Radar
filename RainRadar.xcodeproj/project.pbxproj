@@ -76,6 +76,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EE080AAC29F164BA0094F701 /* WeatherManager */ = {
+			isa = PBXGroup;
+			children = (
+				EEE6449E29F01BC900546CC4 /* LocationDataManager.swift */,
+				EEE6449C29EFF6E100546CC4 /* WeatherKitManager.swift */,
+			);
+			path = WeatherManager;
+			sourceTree = "<group>";
+		};
 		EE3D949429EFD68000DB3F3A = {
 			isa = PBXGroup;
 			children = (
@@ -99,13 +108,12 @@
 		EE3D949F29EFD68000DB3F3A /* RainRadar */ = {
 			isa = PBXGroup;
 			children = (
+				EE080AAC29F164BA0094F701 /* WeatherManager */,
 				EE3D94CA29EFD9B900DB3F3A /* RainRadar.entitlements */,
 				EE3D94A029EFD68000DB3F3A /* RainRadarApp.swift */,
 				EE3D94A229EFD68000DB3F3A /* ContentView.swift */,
 				EE3D94A429EFD68100DB3F3A /* Assets.xcassets */,
 				EE3D94A629EFD68100DB3F3A /* Preview Content */,
-				EEE6449C29EFF6E100546CC4 /* WeatherKitManager.swift */,
-				EEE6449E29F01BC900546CC4 /* LocationDataManager.swift */,
 			);
 			path = RainRadar;
 			sourceTree = "<group>";
