@@ -24,7 +24,7 @@ import WeatherKit
         }
     
     var text: String {
-        "The weather at your location is:"
+        "The weather at your nice location is:"
     }
     
     var symbol: String {
