@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EE2ADCBF29F9125100733B86 /* MusicKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2ADCBE29F9125100733B86 /* MusicKitManager.swift */; };
 		EE3D94A129EFD68000DB3F3A /* RainRadarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3D94A029EFD68000DB3F3A /* RainRadarApp.swift */; };
 		EE3D94A329EFD68000DB3F3A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3D94A229EFD68000DB3F3A /* ContentView.swift */; };
 		EE3D94A529EFD68100DB3F3A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE3D94A429EFD68100DB3F3A /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EE2ADCBE29F9125100733B86 /* MusicKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicKitManager.swift; sourceTree = "<group>"; };
 		EE3D949D29EFD68000DB3F3A /* RainRadar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RainRadar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE3D94A029EFD68000DB3F3A /* RainRadarApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RainRadarApp.swift; sourceTree = "<group>"; };
 		EE3D94A229EFD68000DB3F3A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -85,6 +87,14 @@
 			path = WeatherManager;
 			sourceTree = "<group>";
 		};
+		EE2ADCBD29F9123100733B86 /* MusicManager */ = {
+			isa = PBXGroup;
+			children = (
+				EE2ADCBE29F9125100733B86 /* MusicKitManager.swift */,
+			);
+			path = MusicManager;
+			sourceTree = "<group>";
+		};
 		EE3D949429EFD68000DB3F3A = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +118,7 @@
 		EE3D949F29EFD68000DB3F3A /* RainRadar */ = {
 			isa = PBXGroup;
 			children = (
+				EE2ADCBD29F9123100733B86 /* MusicManager */,
 				EE080AAC29F164BA0094F701 /* WeatherManager */,
 				EE3D94CA29EFD9B900DB3F3A /* RainRadar.entitlements */,
 				EE3D94A029EFD68000DB3F3A /* RainRadarApp.swift */,
@@ -273,6 +284,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE2ADCBF29F9125100733B86 /* MusicKitManager.swift in Sources */,
 				EE3D94A329EFD68000DB3F3A /* ContentView.swift in Sources */,
 				EE3D94A129EFD68000DB3F3A /* RainRadarApp.swift in Sources */,
 				EEE6449F29F01BC900546CC4 /* LocationDataManager.swift in Sources */,
@@ -440,6 +452,7 @@
 				DEVELOPMENT_TEAM = R9XJ622U85;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Please allow acces to continue";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App needs to acces your location data to tell you the weather at your location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -473,6 +486,7 @@
 				DEVELOPMENT_TEAM = R9XJ622U85;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Please allow acces to continue";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App needs to acces your location data to tell you the weather at your location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
