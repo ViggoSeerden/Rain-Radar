@@ -75,9 +75,9 @@ import WeatherKit
                 case 0...1:
                     return "Dryer than your girlfriend"
                 case 1...5:
-                    return "Moist"
+                    return "Quite moist out innit"
                 case 5...10:
-                    return "it's raining men"
+                    return "It's raining men, hallelujah"
                 case 10...100:
                     return "EVERY MAN FOR HIMSELF"
                 default:
@@ -102,7 +102,12 @@ import WeatherKit
     }
     
     func convertTemp(temperature: Measurement<UnitTemperature>) -> String {
-        let convert = temperature.converted(to: .celsius).description
-        return convert
+        let convert = temperature.converted(to: .celsius).value
+        return String(format: "%.1f", convert)
+    }
+    
+    func convertRain(rain: Double) -> String {
+        let convert = Measurement(value: rain, unit: UnitLength.millimeters).value
+        return String(format: "%.1f", convert) + " mm"
     }
 }

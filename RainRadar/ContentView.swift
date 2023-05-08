@@ -72,6 +72,8 @@ struct ContentView: View {
                                             Spacer()
                                             Image(systemName: weatherEntry.symbolName)
                                             Text(weatherKitManager.convertTemp(temperature: weatherEntry.temperature))
+                                            Spacer()
+                                            Text(weatherKitManager.convertRain(rain: weatherEntry.precipitationAmount.value))
                                         }
                                     }
                                 }
