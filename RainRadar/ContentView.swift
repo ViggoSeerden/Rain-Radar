@@ -58,6 +58,8 @@ struct ContentView: View {
                         await weatherKitManager.getWeather(latitude: locationDataManager.latitude, longitude: locationDataManager.longitude)
                         await weatherKitManager.getHourlyForecast(latitude: locationDataManager.latitude, longitude: locationDataManager.longitude)
                     }
+                Text("\(weatherKitManager.rain) mm/hour")
+                Text(weatherKitManager.analogy)
                 
                 if !hourlyForecastByDate.isEmpty {
                     TabView {
@@ -73,7 +75,7 @@ struct ContentView: View {
                                         }
                                     }
                                 }
-                                .frame(width: 300, height: 600)
+                                .frame(width: 300, height: 280)
                                 .tabItem { Text(DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .short)) }
                             }
                         }
