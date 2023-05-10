@@ -9,7 +9,12 @@ import SwiftUI
 
 struct GameView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Image("logo")
+                .resizable().frame(width: 361.2, height: 282.2)
+        }
+        .padding(2000)
+        .background(Color(UIColor.secondarySystemBackground))
     }
 }
 
