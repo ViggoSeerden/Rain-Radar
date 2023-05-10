@@ -36,14 +36,16 @@ struct ContentView: View {
         NavigationStack{
             List(songs) {
                 song in HStack{
-                    AsyncImage(url: song.imageUrl)
-                        .frame(width: 75, height: 75, alignment: .center)
-                    VStack(alignment: .leading){
-                        Text(song.name)
-                            .font(.title3)
-                        Text(song.artist)
-                            .font(.footnote)
-                    }.padding()
+                    NavigationLink(destination: SongDetailView(song: song), label: {
+                        AsyncImage(url: song.imageUrl)
+                            .frame(width: 75, height: 75, alignment: .center)
+                        VStack(alignment: .leading){
+                            Text(song.name)
+                                .font(.title3)
+                            Text(song.artist)
+                                .font(.footnote)
+                        }.padding()
+                    })
                 }
             }
         }.onAppear(){
@@ -120,4 +122,34 @@ struct ContentView: View {
 
             }
         }
-}
+    
+    struct SongDetailView: View {
+        
+        let song: Item
+        
+        var body: some View {
+            VStack {
+                AsyncImage(url: song.imageUrl) {image in
+                    image
+                        .resizable()
+                        .frame(width: 200, height: 200)
+                    
+                } placeholder: {
+                    Rectangle()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 100, height: 100)
+                        .background(Color(UIColor.secondarySystemBackground))
+                }
+                    .frame(width: 200, height: 200, alignment: .center)
+                VStack{
+                    Text(song.name)
+                        .font(.title)
+                    Text(song.artist)
+                        .font(.title3)
+                }.padding()
+                }
+            }
+        }
+    }
+
+
