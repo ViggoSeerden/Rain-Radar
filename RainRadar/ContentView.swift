@@ -24,46 +24,66 @@ struct ContentView: View {
     }
     
     var body: some View {
-        if locationDataManager.authorizationStatus == .authorizedWhenInUse {
-            VStack {
-                Text(weatherKitManager.text)
-                    .padding(.top, 100)
-                Label(weatherKitManager.temp, systemImage: weatherKitManager.symbol)
-                    .task {
-                        await weatherKitManager.getWeather(latitude: locationDataManager.latitude, longitude: locationDataManager.longitude)
-                        await weatherKitManager.getHourlyForecast(latitude: locationDataManager.latitude, longitude: locationDataManager.longitude)
+        VStack{
+            if locationDataManager.authorizationStatus == .authorizedWhenInUse {
+                VStack {
+                    VStack {
+                        Text(weatherKitManager.text)
+                            
+                        Label(weatherKitManager.temp, systemImage: weatherKitManager.symbol)
+                            .task {
+                                await weatherKitManager.getWeather(latitude: locationDataManager.latitude, longitude: locationDataManager.longitude)
+                                await weatherKitManager.getHourlyForecast(latitude: locationDataManager.latitude, longitude: locationDataManager.longitude)
+                            }
+                        Text("\(weatherKitManager.rain) mm/hour")
+                        Text(weatherKitManager.analogy)
                     }
-                Text("\(weatherKitManager.rain) mm/hour")
-                Text(weatherKitManager.analogy)
-                
-                if !hourlyForecastByDate.isEmpty {
-                    TabView {
-                        ForEach(sortedDates, id: \.self) { date in
-                            if let weatherEntries = hourlyForecastByDate[date] {
-                                ScrollView {
-                                    ForEach(weatherEntries, id: \.self.date) { weatherEntry in
-                                        HStack {
-                                            Text(DateFormatter.localizedString(from: weatherEntry.date, dateStyle: .short, timeStyle: .short))
-                                            Spacer()
-                                            Image(systemName: weatherEntry.symbolName)
-                                            Text(weatherKitManager.convertTemp(temperature: weatherEntry.temperature))
-                                            Spacer()
-                                            Text(weatherKitManager.convertRain(rain: weatherEntry.precipitationAmount.value))
+                    .padding(20)
+                    .border(Color(UIColor.systemBackground))
+                    .background(Color(UIColor.systemBackground))
+                    .cornerRadius(20)
+                    .padding(10)
+                    
+                    if !hourlyForecastByDate.isEmpty {
+                        TabView {
+                            ForEach(sortedDates, id: \.self) { date in
+                                if let weatherEntries = hourlyForecastByDate[date] {
+                                    ScrollView {
+                                        ForEach(weatherEntries, id: \.self.date) {
+                                            weatherEntry in HStack {
+                                                Text(DateFormatter.localizedString(from: weatherEntry.date, dateStyle: .short, timeStyle: .short))
+                                                Spacer()
+                                                Image(systemName: weatherEntry.symbolName)
+                                                Text(weatherKitManager.convertTemp(temperature: weatherEntry.temperature))
+                                                Spacer()
+                                                Text(weatherKitManager.convertRain(rain: weatherEntry.precipitationAmount.value))
+                                            }
                                         }
                                     }
-                                    .padding(.top, 50)
+                                    .frame(width: 300, height: 400)
+                                    .tabItem { Text(DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .short)) }
                                 }
-                                .frame(width: 300, height: 600)
-                                .tabItem { Text(DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .short)) }
                             }
                         }
+                        .tabViewStyle(.page)
+                        .indexViewStyle(.page(backgroundDisplayMode: .always))
+                        .padding(10)
+                        .border(Color(UIColor.systemBackground))
+                        .background(Color(UIColor.systemBackground))
+                        .cornerRadius(20)
+                        .padding(27)
                     }
-                    .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
                 }
             }
-        }
-        else {
-            Text("Error Loading Location:")
-        }
+            else {
+                Text("Error Loading Location:")
+            }
+        }.background(Color(UIColor.secondarySystemBackground))
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
     }
 }
