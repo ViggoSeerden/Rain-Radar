@@ -31,27 +31,29 @@ struct ContentView: View {
                         Text(weatherKitManager.text)
                             
                         Label(weatherKitManager.temp, systemImage: weatherKitManager.symbol)
+                            .padding(.bottom, 10)
                             .task {
                                 await weatherKitManager.getWeather(latitude: locationDataManager.latitude, longitude: locationDataManager.longitude)
                                 await weatherKitManager.getHourlyForecast(latitude: locationDataManager.latitude, longitude: locationDataManager.longitude)
                             }
-                        Text("\(weatherKitManager.rain) mm/hour")
+                        Text("Rainfall for today: \(weatherKitManager.rain) mm/hour")
                         Text(weatherKitManager.analogy)
                     }
                     .padding(20)
                     .border(Color(UIColor.systemBackground))
                     .background(Color(UIColor.systemBackground))
                     .cornerRadius(20)
-                    .padding(10)
+                    .padding(.top, 50)
                     
                     if !hourlyForecastByDate.isEmpty {
                         TabView {
                             ForEach(sortedDates, id: \.self) { date in
                                 if let weatherEntries = hourlyForecastByDate[date] {
                                     ScrollView {
+                                        Text(DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .none)).padding(.bottom, 10)
                                         ForEach(weatherEntries, id: \.self.date) {
                                             weatherEntry in HStack {
-                                                Text(DateFormatter.localizedString(from: weatherEntry.date, dateStyle: .short, timeStyle: .short))
+                                                Text(DateFormatter.localizedString(from: weatherEntry.date, dateStyle: .none, timeStyle: .short))
                                                 Spacer()
                                                 Image(systemName: weatherEntry.symbolName)
                                                 Text(weatherKitManager.convertTemp(temperature: weatherEntry.temperature))
@@ -64,14 +66,14 @@ struct ContentView: View {
                                     .tabItem { Text(DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .short)) }
                                 }
                             }
+                            .padding(.vertical, 20)
+                            .padding(.horizontal, 25)
+                            .border(Color(UIColor.systemBackground))
+                            .background(Color(UIColor.systemBackground))
+                            .cornerRadius(20)
                         }
                         .tabViewStyle(.page)
                         .indexViewStyle(.page(backgroundDisplayMode: .always))
-                        .padding(10)
-                        .border(Color(UIColor.systemBackground))
-                        .background(Color(UIColor.systemBackground))
-                        .cornerRadius(20)
-                        .padding(27)
                     }
                 }
             }
