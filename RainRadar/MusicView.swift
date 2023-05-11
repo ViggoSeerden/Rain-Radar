@@ -42,8 +42,8 @@ struct MusicView: View {
     }
     
     private let request: MusicCatalogSearchRequest = {
-        var request = MusicCatalogSearchRequest(term: "Flowers", types: [Song.self])
-        request.limit = 10
+        var request = MusicCatalogSearchRequest(term: "Rain", types: [Song.self])
+        request.limit = 6
         return request
     }()
     

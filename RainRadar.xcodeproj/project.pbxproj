@@ -20,6 +20,7 @@
 		EE3D94B229EFD68100DB3F3A /* RainRadarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3D94B129EFD68100DB3F3A /* RainRadarTests.swift */; };
 		EE3D94BC29EFD68100DB3F3A /* RainRadarUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3D94BB29EFD68100DB3F3A /* RainRadarUITests.swift */; };
 		EE3D94BE29EFD68100DB3F3A /* RainRadarUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE3D94BD29EFD68100DB3F3A /* RainRadarUITestsLaunchTests.swift */; };
+		EEDBE5472A0CDBC400C33BCA /* AlarmClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEDBE5462A0CDBC400C33BCA /* AlarmClockView.swift */; };
 		EEE6449D29EFF6E100546CC4 /* WeatherKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE6449C29EFF6E100546CC4 /* WeatherKitManager.swift */; };
 		EEE6449F29F01BC900546CC4 /* LocationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEE6449E29F01BC900546CC4 /* LocationDataManager.swift */; };
 /* End PBXBuildFile section */
@@ -59,6 +60,7 @@
 		EE3D94BB29EFD68100DB3F3A /* RainRadarUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RainRadarUITests.swift; sourceTree = "<group>"; };
 		EE3D94BD29EFD68100DB3F3A /* RainRadarUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RainRadarUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		EE3D94CA29EFD9B900DB3F3A /* RainRadar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RainRadar.entitlements; sourceTree = "<group>"; };
+		EEDBE5462A0CDBC400C33BCA /* AlarmClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmClockView.swift; sourceTree = "<group>"; };
 		EEE6449C29EFF6E100546CC4 /* WeatherKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherKitManager.swift; sourceTree = "<group>"; };
 		EEE6449E29F01BC900546CC4 /* LocationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,6 +134,7 @@
 				EE080AAC29F164BA0094F701 /* WeatherManager */,
 				EE3D94CA29EFD9B900DB3F3A /* RainRadar.entitlements */,
 				EE3D94A029EFD68000DB3F3A /* RainRadarApp.swift */,
+				EEDBE5462A0CDBC400C33BCA /* AlarmClockView.swift */,
 				EE3D94A229EFD68000DB3F3A /* ContentView.swift */,
 				83CE6F142A0CD9B3002DFBE5 /* Rainfall.sks */,
 				839F4E7E2A0BC03D00C607F6 /* Media.xcassets */,
@@ -309,6 +312,7 @@
 				839F4E792A0B832800C607F6 /* GameView.swift in Sources */,
 				839F4E7D2A0B891400C607F6 /* MusicView.swift in Sources */,
 				EEE6449D29EFF6E100546CC4 /* WeatherKitManager.swift in Sources */,
+				EEDBE5472A0CDBC400C33BCA /* AlarmClockView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
