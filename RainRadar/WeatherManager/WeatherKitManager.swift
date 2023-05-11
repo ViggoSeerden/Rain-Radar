@@ -47,6 +47,10 @@ import WeatherKit
         weather?.currentWeather.symbolName ?? ""
     }
     
+    var condition: String {
+        weather?.currentWeather.condition.description ?? ""
+    }
+    
     var temp: String {
         let temp =
         weather?.currentWeather.temperature

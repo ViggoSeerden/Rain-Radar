@@ -8,11 +8,11 @@
 import SwiftUI
 import MusicKit
 import WeatherKit
+import SpriteKit
 
 struct ContentView: View {
     @ObservedObject var weatherKitManager = WeatherKitManager()
     @StateObject var locationDataManager = LocationDataManager()
-    
     
     var hourlyForecastByDate: [Date: [HourWeather]] {
         guard let hourlyForecast = weatherKitManager.hourlyForecast else { return [:] }
@@ -80,12 +80,29 @@ struct ContentView: View {
             else {
                 Text("Error Loading Location:")
             }
-        }.background(Color(UIColor.secondarySystemBackground))
+        }
+        .background(Color(UIColor.secondarySystemBackground))
+        .background(weatherKitManager.condition.contains("Rain") ?
+                    AnyView(SpriteView(scene: Rainfall(), options: [.allowsTransparency])) :
+                    AnyView(Color.clear))
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+    }
+}
+
+
+class Rainfall: SKScene{
+    override func sceneDidLoad() {
+        size = UIScreen.main.bounds.size
+        scaleMode = .resizeFill
+        backgroundColor = .clear
+        anchorPoint = CGPoint(x: 0.5, y: 1)
+        
+        let node = SKEmitterNode(fileNamed: "Rainfall.sks")!
+        addChild(node)
     }
 }
