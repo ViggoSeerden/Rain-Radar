@@ -16,6 +16,7 @@ struct MusicView: View {
         let name: String
         let artist: String
         let imageUrl: URL?
+        let songUrl: URL?
     }
     
     @State var songs = [Item]()
@@ -64,7 +65,7 @@ struct MusicView: View {
                     do {
                         let result = try await searchRequest.response()
                         self.songs = result.songs.compactMap { song in
-                            return Item(name: song.title, artist: song.artistName, imageUrl: song.artwork?.url(width: 75, height: 75))
+                            return Item(name: song.title, artist: song.artistName, imageUrl: song.artwork?.url(width: 75, height: 75), songUrl: song.url)
                         }
                     } catch {
                         print("Error: \(error)")
@@ -78,6 +79,7 @@ struct MusicView: View {
     struct SongDetailView: View {
         
         let song: Item
+        @Environment(\.openURL) var openURL
         
         var body: some View {
             VStack {
@@ -92,16 +94,32 @@ struct MusicView: View {
                         .frame(width: 100, height: 100)
                         .background(Color(UIColor.secondarySystemBackground))
                 }
-                    .frame(width: 200, height: 200, alignment: .center)
+                .frame(width: 200, height: 200, alignment: .center)
                 VStack{
                     Text(song.name)
                         .font(.title)
                     Text(song.artist)
                         .font(.title3)
-                }.padding()
                 }
+                Button(action:
+                        {
+                    playSong()
+                }){
+                    Text("Play")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color.blue)
+                        .cornerRadius(10)
+                }
+                .padding()
             }
         }
+        
+        private func playSong() {
+            openURL((song.songUrl)!)
+        }
+    }
     }
 
 
