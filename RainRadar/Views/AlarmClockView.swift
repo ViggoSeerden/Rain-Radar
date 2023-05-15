@@ -28,6 +28,7 @@ struct AlarmClockView: View {
                                             .font(Font.headline.weight(.medium))
                                         DatePicker("", selection: Binding(get: {time}, set: {time = $0}), displayedComponents: .hourAndMinute)
                                     }
+                                    .frame(height: 100)
                                 .contextMenu {
                                     Button(action: {
                                         text.remove(at: i)
