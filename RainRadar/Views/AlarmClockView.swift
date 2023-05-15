@@ -12,7 +12,7 @@ struct AlarmClockView: View {
     @State var showsheet = false
     @State var textitemtemp = ""
     @State var time = Date()
-    
+
     var body: some View {
         NavigationView{
             VStack{
@@ -22,15 +22,21 @@ struct AlarmClockView: View {
                     } else {
                         List{
                             ForEach((1...text.count-1), id: \.self) {
-                                i in Text(text[i])
-                                    .contextMenu {
-                                        Button(action: {
-                                            text.remove(at: i)
-                                        }, label: {
-                                            Label("Delete", systemImage: "delete.left")
-                                        })
+                                i in
+                                    HStack {
+                                        Text(text[i])
+                                            .font(Font.headline.weight(.medium))
+                                        DatePicker("", selection: Binding(get: {time}, set: {time = $0}), displayedComponents: .hourAndMinute)
                                     }
-                            }}
+                                .contextMenu {
+                                    Button(action: {
+                                        text.remove(at: i)
+                                    }, label: {
+                                        Label("Delete", systemImage: "delete.left")
+                                    })
+                                }
+                            }
+                        }
                     }
                 }
                 .navigationTitle("Alarm")
@@ -62,7 +68,7 @@ struct AlarmClockView: View {
                         Section(header:(Text("Alarm"))) {
                             TextField("Alarm Name:", text: $textitemtemp)
                             DatePicker("Pick A Time:", selection: $time, displayedComponents: .hourAndMinute)
-                                    }
+                        }
                     }
                     .navigationTitle("Add A Alarm")
                     .toolbar{
@@ -75,10 +81,15 @@ struct AlarmClockView: View {
             }
         }
     }
+    
     func saveData() -> Void {
         let temp = text.joined(separator: "/[split]/")
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+        let timeString = formatter.string(from: time)
         let key = UserDefaults.standard
         key.set(temp, forKey: "text")
+        key.set(timeString, forKey: "time")
     }
     
     func loadData() -> Void {
@@ -86,6 +97,12 @@ struct AlarmClockView: View {
         let temp = key.string(forKey: "text") ?? ""
         let temparray = temp.components(separatedBy: "/[split]/")
         text = temparray
+        
+        let timeString = key.string(forKey: "time") ?? ""
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+        let date = formatter.date(from: timeString) ?? Date()
+        time = date
     }
 }
 

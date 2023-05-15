@@ -24,7 +24,7 @@ struct ContentView: View {
     }
     
     var body: some View {
-        VStack{
+        NavigationView{
             if locationDataManager.authorizationStatus == .authorizedWhenInUse {
                 VStack {
                     VStack {

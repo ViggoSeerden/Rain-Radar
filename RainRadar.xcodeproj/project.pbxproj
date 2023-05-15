@@ -130,19 +130,16 @@
 		EE3D949F29EFD68000DB3F3A /* RainRadar */ = {
 			isa = PBXGroup;
 			children = (
+				EEDBE5482A0D1DE000C33BCA /* Views */,
 				EE2ADCBD29F9123100733B86 /* MusicManager */,
 				EE080AAC29F164BA0094F701 /* WeatherManager */,
 				EE3D94CA29EFD9B900DB3F3A /* RainRadar.entitlements */,
 				EE3D94A029EFD68000DB3F3A /* RainRadarApp.swift */,
-				EEDBE5462A0CDBC400C33BCA /* AlarmClockView.swift */,
-				EE3D94A229EFD68000DB3F3A /* ContentView.swift */,
 				83CE6F142A0CD9B3002DFBE5 /* Rainfall.sks */,
 				839F4E7E2A0BC03D00C607F6 /* Media.xcassets */,
 				EE3D94A429EFD68100DB3F3A /* Assets.xcassets */,
 				EE3D94A629EFD68100DB3F3A /* Preview Content */,
 				839F4E782A0B832800C607F6 /* GameView.swift */,
-				839F4E7A2A0B847100C607F6 /* MainView.swift */,
-				839F4E7C2A0B891400C607F6 /* MusicView.swift */,
 			);
 			path = RainRadar;
 			sourceTree = "<group>";
@@ -170,6 +167,17 @@
 				EE3D94BD29EFD68100DB3F3A /* RainRadarUITestsLaunchTests.swift */,
 			);
 			path = RainRadarUITests;
+			sourceTree = "<group>";
+		};
+		EEDBE5482A0D1DE000C33BCA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EEDBE5462A0CDBC400C33BCA /* AlarmClockView.swift */,
+				EE3D94A229EFD68000DB3F3A /* ContentView.swift */,
+				839F4E7A2A0B847100C607F6 /* MainView.swift */,
+				839F4E7C2A0B891400C607F6 /* MusicView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

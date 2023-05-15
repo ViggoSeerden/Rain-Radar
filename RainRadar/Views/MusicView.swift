@@ -7,6 +7,7 @@
 
 import SwiftUI
 import MusicKit
+import WeatherKit
 
 struct MusicView: View {
     
@@ -18,6 +19,9 @@ struct MusicView: View {
     }
     
     @State var songs = [Item]()
+    @ObservedObject var weatherKitManager = WeatherKitManager()
+    @StateObject var locationDataManager = LocationDataManager()
+
     
     var body: some View {
         
@@ -35,42 +39,40 @@ struct MusicView: View {
                         }.padding()
                     })
                 }
-            }
+            }.navigationTitle("Songs")
         }.onAppear(){
             fetchMusic()
         }
     }
     
-    private let request: MusicCatalogSearchRequest = {
-        var request = MusicCatalogSearchRequest(term: "Rain", types: [Song.self])
-        request.limit = 6
-        return request
-    }()
-    
-    private func fetchMusic(){
-        Task{
-            //Request Permission
-            let status = await MusicAuthorization.request()
-            switch status{
-            case .authorized:
-                //Request -> Response
-                do{
-                    let result = try await request.response()
-                    self.songs = result.songs.compactMap({
-                        return .init(name: $0.title, artist:$0.artistName, imageUrl: $0.artwork?.url(width: 75, height: 75))
-                    })
-                    print(String(describing: songs[0]))
-                }catch{
-                    print(String(describing: error))
+    private func fetchMusic() {
+        Task {
+            // Request Permission
+            let musicAuthorizationStatus = await MusicAuthorization.request()
+            
+            if case .authorized = musicAuthorizationStatus {
+                // Fetch Weather
+                do {
+                    await weatherKitManager.getWeather(latitude: locationDataManager.latitude, longitude: locationDataManager.longitude)
+                    let weatherCondition = weatherKitManager.condition
+                    
+                    //Modify search term based on weather condition
+                    var searchRequest = MusicCatalogSearchRequest(term: weatherCondition, types: [Song.self])
+                    searchRequest.limit = 10
+                    
+                     //Request -> Response
+                    do {
+                        let result = try await searchRequest.response()
+                        self.songs = result.songs.compactMap { song in
+                            return Item(name: song.title, artist: song.artistName, imageUrl: song.artwork?.url(width: 75, height: 75))
+                        }
+                    } catch {
+                        print("Error: \(error)")
+                    }
                 }
-                //Assign Song
-                
-            default:
-                break
-            }
-
             }
         }
+    }
     
     
     struct SongDetailView: View {

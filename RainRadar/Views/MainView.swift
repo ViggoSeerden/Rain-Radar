@@ -14,6 +14,10 @@ struct MainView: View {
                 .tabItem {
                     Label("Weather", systemImage: "cloud")
                 }
+            AlarmClockView()
+                .tabItem {
+                    Label("Alarm", systemImage: "alarm.fill")
+                }
             MusicView()
                 .tabItem {
                     Label("Music", systemImage: "music.note")
@@ -22,7 +26,6 @@ struct MainView: View {
                 .tabItem {
                     Label("Game", systemImage: "gamecontroller.fill")
                 }
-            
         }
     }
 }

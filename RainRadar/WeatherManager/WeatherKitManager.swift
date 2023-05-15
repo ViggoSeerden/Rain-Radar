@@ -13,25 +13,26 @@ import WeatherKit
     @Published var weather: Weather?
     @Published var hourlyForecast: Forecast<HourWeather>?
     
-    
     func getWeather(latitude: Double, longitude: Double) async {
         do {
             weather = try await Task.detached(priority: .userInitiated) {
                 return try await WeatherService.shared.weather(for: .init(latitude: latitude, longitude: longitude))
             }.value
+
         } catch {
             fatalError("\(error)")
         }
     }
+
     
     func getHourlyForecast(latitude: Double, longitude: Double) async {
         Task.detached(priority: .userInitiated) {
             do {
-                let forcast = try await WeatherService.shared.weather(
+                let forecast = try await WeatherService.shared.weather(
                     for: .init(latitude: latitude, longitude: longitude),
                     including: .hourly)
                 DispatchQueue.main.async {
-                    self.hourlyForecast = forcast
+                    self.hourlyForecast = forecast
                 }
             } catch {
                 print(error.localizedDescription)
@@ -48,7 +49,7 @@ import WeatherKit
     }
     
     var condition: String {
-        weather?.currentWeather.condition.description ?? ""
+        weather?.currentWeather.condition.description ?? "Error"
     }
     
     var temp: String {
