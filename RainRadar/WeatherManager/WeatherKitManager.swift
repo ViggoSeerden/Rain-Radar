@@ -40,10 +40,6 @@ import WeatherKit
         }
     }
     
-    var text: String {
-        "The current weather at your location is:"
-    }
-    
     var symbol: String {
         weather?.currentWeather.symbolName ?? ""
     }

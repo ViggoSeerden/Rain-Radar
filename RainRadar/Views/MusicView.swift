@@ -26,25 +26,31 @@ struct MusicView: View {
     
     var body: some View {
         
-        NavigationStack{
-            List(songs) {
-                song in HStack{
-                    NavigationLink(destination: SongDetailView(song: song), label: {
+        NavigationView {
+            VStack {
+                List(songs) { song in
+                    NavigationLink(destination: SongDetailView(song: song)) {
                         AsyncImage(url: song.imageUrl)
                             .frame(width: 75, height: 75, alignment: .center)
-                        VStack(alignment: .leading){
+                        VStack(alignment: .leading) {
                             Text(song.name)
                                 .font(.title3)
                             Text(song.artist)
                                 .font(.footnote)
-                        }.padding()
-                    })
+                        }
+                        .padding()
+                    }
                 }
-            }.navigationTitle("Songs")
-        }.onAppear(){
-            fetchMusic()
+                .navigationTitle("Songs")
+            }
+            .onAppear {
+                fetchMusic()
+            }
+            .background(Color(red: 69/255, green: 130/255, blue: 191/255))
         }
+
     }
+    
     
     private func fetchMusic() {
         Task {

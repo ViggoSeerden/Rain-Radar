@@ -28,20 +28,29 @@ struct ContentView: View {
             if locationDataManager.authorizationStatus == .authorizedWhenInUse {
                 VStack {
                     VStack {
-                        Text(weatherKitManager.text)
-                            
-                        Label(weatherKitManager.temp, systemImage: weatherKitManager.symbol)
+                        Text("Eindhoven")
+                            .font(.largeTitle)
+                            .foregroundColor(Color.white)
+                        Image(systemName: "\(weatherKitManager.symbol).fill")
+                            .symbolRenderingMode(.multicolor)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                        Text(weatherKitManager.temp)
                             .padding(.bottom, 10)
+                            .font(.title)
+                            .foregroundColor(Color.white)
                             .task {
                                 await weatherKitManager.getWeather(latitude: locationDataManager.latitude, longitude: locationDataManager.longitude)
                                 await weatherKitManager.getHourlyForecast(latitude: locationDataManager.latitude, longitude: locationDataManager.longitude)
                             }
-                        Text("Rainfall for today: \(weatherKitManager.rain) mm/hour")
+                        //Text("Rainfall for today: \(weatherKitManager.rain) mm/hour")
+                            //.foregroundColor(Color.white)
                         Text(weatherKitManager.analogy)
+                            .foregroundColor(Color.white)
                     }
-                    .padding(20)
-                    .border(Color(UIColor.systemBackground))
-                    .background(Color(UIColor.systemBackground))
+                    .padding(.horizontal, 80)
+                    .padding(.vertical, 10)
+                    .background(Color(red: 30/255, green: 110/255, blue: 180/255))
                     .cornerRadius(20)
                     .padding(.top, 50)
                     
@@ -50,38 +59,51 @@ struct ContentView: View {
                             ForEach(sortedDates, id: \.self) { date in
                                 if let weatherEntries = hourlyForecastByDate[date] {
                                     ScrollView {
-                                        Text(DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .none)).padding(.bottom, 10)
-                                        ForEach(weatherEntries, id: \.self.date) {
-                                            weatherEntry in HStack {
-                                                Text(DateFormatter.localizedString(from: weatherEntry.date, dateStyle: .none, timeStyle: .short))
-                                                Spacer()
-                                                Image(systemName: weatherEntry.symbolName)
-                                                Text(weatherKitManager.convertTemp(temperature: weatherEntry.temperature))
-                                                Spacer()
-                                                Text(weatherKitManager.convertRain(rain: weatherEntry.precipitationAmount.value))
+                                        VStack(spacing: 10){
+                                            Text(DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .none))
+                                                .padding(.top, 25)
+                                                .padding(.bottom, 10)
+                                                .font(.title)
+                                                .foregroundColor(Color.white)
+                                            ForEach(weatherEntries, id: \.self.date) {
+                                                weatherEntry in HStack {
+                                                    Text(DateFormatter.localizedString(from: weatherEntry.date, dateStyle: .none, timeStyle: .short))
+                                                        .foregroundColor(Color.white)
+                                                    Spacer()
+                                                    Image(systemName: "\(weatherEntry.symbolName).fill")
+                                                        .symbolRenderingMode(.multicolor)
+                                                    Text(weatherKitManager.convertTemp(temperature: weatherEntry.temperature))
+                                                        .foregroundColor(Color.white)
+                                                    Spacer()
+                                                    Text(weatherKitManager.convertRain(rain: weatherEntry.precipitationAmount.value))
+                                                        .foregroundColor(Color.white)
+                                                }
                                             }
                                         }
                                     }
-                                    .frame(width: 300, height: 400)
+                                    .frame(width: 300, height: 300)
                                     .tabItem { Text(DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .short)) }
                                 }
                             }
                             .padding(.vertical, 20)
                             .padding(.horizontal, 25)
-                            .border(Color(UIColor.systemBackground))
-                            .background(Color(UIColor.systemBackground))
+                            .background(Color(red: 30/255, green: 110/255, blue: 180/255))
+
                             .cornerRadius(20)
+                            
+
                         }
                         .tabViewStyle(.page)
                         .indexViewStyle(.page(backgroundDisplayMode: .always))
                     }
                 }
+                .background(Color(red: 69/255, green: 130/255, blue: 191/255))
             }
             else {
                 Text("Error Loading Location:")
             }
         }
-        .background(Color(UIColor.secondarySystemBackground))
+        .background(Color(red: 69/255, green: 130/255, blue: 191/255))
         .background(weatherKitManager.condition.contains("Rain") ?
                     AnyView(SpriteView(scene: Rainfall(), options: [.allowsTransparency])) :
                     AnyView(Color.clear))

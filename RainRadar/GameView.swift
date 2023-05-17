@@ -14,7 +14,7 @@ struct GameView: View {
                 .resizable().frame(width: 361.2, height: 282.2)
         }
         .padding(2000)
-        .background(Color(UIColor.secondarySystemBackground))
+        .background(Color(red: 69/255, green: 130/255, blue: 191/255))
     }
 }
 

@@ -79,8 +79,10 @@ struct AlarmClockView: View {
                         }
                     }
                 }
+                .background(Color(red: 69/255, green: 130/255, blue: 191/255))
             }
         }
+        .background(Color(red: 69/255, green: 130/255, blue: 191/255))
     }
     
     func saveData() -> Void {
